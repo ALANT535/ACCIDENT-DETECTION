@@ -31,24 +31,24 @@ print(np.shape(X_normalised))
 
 input_shape = (1280, 720, 1)
 
-# model = tf.keras.Sequential([
-# tf.keras.layers.Input(shape=input_shape),
-# tf.keras.layers.Conv2D(32, 3, activation='relu'),
-# tf.keras.layers.BatchNormalization(),
-# tf.keras.layers.MaxPooling2D(),
-# tf.keras.layers.Conv2D(64, 3, activation='relu'),
-# tf.keras.layers.MaxPooling2D(),
-# tf.keras.layers.Conv2D(128, 3, activation='relu'),
-# tf.keras.layers.MaxPooling2D(),
-# tf.keras.layers.Flatten(),
-# tf.keras.layers.Dense(256, activation='relu'),
-# tf.keras.layers.Dense(2, activation= 'softmax')
-# ])
+model = tf.keras.Sequential([
+tf.keras.layers.Input(shape=input_shape),
+tf.keras.layers.Conv2D(32, 3, activation='relu'),
+tf.keras.layers.BatchNormalization(),
+tf.keras.layers.MaxPooling2D(),
+tf.keras.layers.Conv2D(64, 3, activation='relu'),
+tf.keras.layers.MaxPooling2D(),
+tf.keras.layers.Conv2D(128, 3, activation='relu'),
+tf.keras.layers.MaxPooling2D(),
+tf.keras.layers.Flatten(),
+tf.keras.layers.Dense(256, activation='relu'),
+tf.keras.layers.Dense(1, activation='sigmoid')
+])
 
-# # print(model.summary())
+# print(model.summary())
 
-# model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['accuracy'])   #binary_cross_entropy because there are only two classes
+model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['accuracy'])   #binary_cross_entropy because there are only two classes
 
-# model.fit(X_normalised, y, epochs=10, validation_split=0.2)
+model.fit(X_normalised, y, batch_size = 32, epochs=10, validation_split=0.2)
 
-# model.save(os.path.join(pickle_path,'model.hd5'))
+model.save(os.path.join(pickle_path,'model.hd5'))
